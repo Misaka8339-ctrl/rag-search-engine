@@ -14,6 +14,7 @@ class InvertedIndex:
         self.term_frequencies: dict[int, Counter[str]] = {}
         self.doc_lengths: dict[int, int] = {}
         self.doc_lengths_path = CACHE_DIR / "doc_lengths.pkl"
+        self.index_path = CACHE_DIR / "index.pkl"
 
     def __add_document(self, doc_id: int, text: str) -> None:
         tokens = tokenize_text(text)
@@ -67,6 +68,9 @@ class InvertedIndex:
         with open(self.doc_lengths_path, "wb") as f:
             pickle.dump(self.doc_lengths, f)
 
+        with open(self.index_path, "wb") as f:
+            pickle.dump(self.index, f)
+
     def load(self) -> None:
         with open(CACHE_DIR / "index.pkl", "rb") as f:
             index = pickle.load(f)
@@ -79,6 +83,9 @@ class InvertedIndex:
 
         with open(self.doc_lengths_path, "rb") as f:
             doc_lengths = pickle.load(f)
+
+        with open(self.index_path, "rb") as f:
+            index = pickle.load(f)
 
         self.index = index
         self.docmap = docmap

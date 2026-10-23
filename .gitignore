@@ -1,6 +1,8 @@
 # Python-generated files
 __pycache__/
 *.py[oc]
+*.py[cod]
+.pytest_cache/
 build/
 dist/
 wheels/
@@ -13,3 +15,5 @@ wheels/
 /cache/
 
 .env
+.env.*
+!.env.example
